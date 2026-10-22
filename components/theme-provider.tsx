@@ -3,7 +3,7 @@
 import * as React from "react"
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes"
 
-function ThemeProvider({
+export default function ThemeProvider({
   children,
   ...props
 }: React.ComponentProps<typeof NextThemesProvider>) {
@@ -35,7 +35,7 @@ function isTypingTarget(target: EventTarget | null) {
 }
 
 function ThemeHotkey() {
-  const { resolvedTheme, setTheme } = useTheme()
+  const { resolvedTheme, systemTheme, setTheme } = useTheme()
 
   React.useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -55,7 +55,10 @@ function ThemeHotkey() {
         return
       }
 
-      setTheme(resolvedTheme === "dark" ? "light" : "dark")
+      const next = resolvedTheme === "dark" ? "light" : "dark"
+
+      // Toggling back to the OS preference resumes following the system
+      setTheme(next === systemTheme ? "system" : next)
     }
 
     window.addEventListener("keydown", onKeyDown)
@@ -63,9 +66,7 @@ function ThemeHotkey() {
     return () => {
       window.removeEventListener("keydown", onKeyDown)
     }
-  }, [resolvedTheme, setTheme])
+  }, [resolvedTheme, systemTheme, setTheme])
 
   return null
 }
-
-export { ThemeProvider }

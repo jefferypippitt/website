@@ -1,19 +1,52 @@
-import { Button } from "@/components/ui/button"
+import { ArrowRightFromLineIcon } from "lucide-react"
+import Link from "next/link"
+import { ViewTransition } from "react"
+
+import FrameworkLoop from "@/components/framework-loop"
+import PageTransition from "@/components/page-transition"
+
+const links = [
+  { href: "/about", name: "about", label: "About Me" },
+  { href: "/projects", name: "projects", label: "Projects" },
+  { href: "/blog", name: "blog", label: "Blog" },
+  { href: "/contact", name: "contact", label: "Contact" },
+]
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
+    <PageTransition>
+      <div className="flex flex-col gap-6">
         <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
+          <h1 className="flex items-center gap-2 text-sm font-medium">
+            <ArrowRightFromLineIcon
+              className="size-4 text-muted-foreground"
+              aria-hidden
+            />
+            <span>
+              Building modern web applications with <FrameworkLoop />
+            </span>
+          </h1>
         </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
-        </div>
+        <ul className="flex flex-col gap-3 text-sm text-muted-foreground">
+          {links.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                transitionTypes={["nav-forward"]}
+                className="hover:text-foreground"
+              >
+                <ViewTransition
+                  name={`title-${link.name}`}
+                  share="text-morph"
+                  default="none"
+                >
+                  <span>{link.label}</span>
+                </ViewTransition>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
-    </div>
+    </PageTransition>
   )
 }

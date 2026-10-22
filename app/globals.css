@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./typeset.css";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
@@ -126,4 +127,27 @@
   html {
     @apply font-sans;
     }
+}
+
+.typeset-article {
+  --typeset-font-body: var(--font-sans);
+  --typeset-font-heading: var(--font-sans);
+  --typeset-font-mono: var(--font-mono);
+  --typeset-size: 14px;
+  --typeset-leading: calc(20 / 14);
+  --typeset-flow: 1.25em;
+  font-size: var(--typeset-size);
+  color: var(--color-muted-foreground);
+}
+
+/* Match the homepage: headings are text-sm font-medium, same size as body. */
+@layer components {
+  .typeset-article :where(h1, h2, h3, h4, h5, h6) {
+    font-size: 1em;
+    line-height: inherit;
+    font-weight: 500;
+    letter-spacing: normal;
+    text-transform: none;
+    color: var(--color-foreground);
+  }
 }
