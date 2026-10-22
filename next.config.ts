@@ -1,4 +1,5 @@
 import createMDX from "@next/mdx"
+import { withBotId } from "botid/next/config"
 import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
@@ -10,4 +11,5 @@ const nextConfig: NextConfig = {
 
 const withMDX = createMDX({})
 
-export default withMDX(nextConfig)
+// Vercel serves BotID's routes itself; this adds them for local dev too
+export default withBotId(withMDX(nextConfig))

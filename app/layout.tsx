@@ -1,10 +1,10 @@
+import { GeistPixelCircle } from "geist/font/pixel"
 import { Geist, Geist_Mono } from "next/font/google"
 
 import "./globals.css"
 import "./view-transitions.css"
-import Footer from "@/components/footer"
-import Navbar from "@/components/navbar"
 import ThemeProvider from "@/components/theme-provider"
+import { Toaster } from "@/components/ui/toast"
 import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'})
@@ -23,15 +23,12 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", geist.variable)}
+      className={cn("antialiased", fontMono.variable, GeistPixelCircle.variable, "font-sans", geist.variable)}
     >
       <body>
         <ThemeProvider>
-          <div className="mx-auto flex min-h-svh w-full max-w-[1600px] flex-col gap-10 p-6">
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
+          {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

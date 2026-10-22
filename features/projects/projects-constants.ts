@@ -1,16 +1,16 @@
 export const projects = [
   {
-    name: "jevelements",
-    description:
-      "Chrome extension and Next.js backend that turns a page section into a Next.js app.",
-    href: "https://github.com/jefferypippitt/jevelements",
-    year: 2026,
-  },
-  {
     name: "AudienceDig",
     description:
       "Turns YouTube comments into a digest of topics, quotes, and tone.",
     href: "https://audiencedig.com",
+    year: 2026,
+  },
+  {
+    name: "jevelements",
+    description:
+      "Chrome extension and Next.js backend that turns a page section into a Next.js app.",
+    href: "https://github.com/jefferypippitt/jevelements",
     year: 2026,
   },
   {
