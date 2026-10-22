@@ -10,13 +10,12 @@ export const socials = [
 export const interests = [
   {
     label: "Tech",
-    description:
-      "Cooking up awesome web projects and keeping tabs on the latest tech trends.",
+    description: "Cooking up web projects and keeping tabs on new tech.",
   },
   { label: "Sports", description: "MMA, soccer, NFL, NBA." },
   {
     label: "Learning",
     description:
-      "Staying in the know about industry changes and mixing up my go-to coding habits.",
+      "Building whatever I'm curious about and figuring it out as I go.",
   },
 ]

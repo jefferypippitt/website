@@ -1,5 +1,6 @@
 import PageTitle from "@/components/page-title"
 import PageTransition from "@/components/page-transition"
+import ContactForm from "@/features/contact/components/contact-form"
 
 export default function Page() {
   return (
@@ -7,10 +8,10 @@ export default function Page() {
       <div className="flex flex-col gap-10">
         <section className="flex flex-col gap-6">
           <PageTitle name="contact">Contact</PageTitle>
-          <div className="flex flex-col gap-3 text-sm text-muted-foreground">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <p>Sed do eiusmod tempor incididunt ut labore.</p>
-          </div>
+          <p className="text-sm text-muted-foreground">
+            Got a project or a question?
+          </p>
+          <ContactForm />
         </section>
       </div>
     </PageTransition>
