@@ -50,6 +50,15 @@
     var(--duration-move) ease-in-out both slide;
 }
 
+/* Wallpapers: the flag star and the atoll crossfade in place, slower than
+   the page so the backdrop settles while the content slides. */
+::view-transition-old(.wallpaper) {
+  animation: var(--duration-move) ease-in both fade reverse;
+}
+::view-transition-new(.wallpaper) {
+  animation: var(--duration-move) ease-out var(--duration-exit) both fade;
+}
+
 /* Homepage link label glides into the page heading. */
 ::view-transition-group(.text-morph) {
   animation-duration: var(--duration-move);
