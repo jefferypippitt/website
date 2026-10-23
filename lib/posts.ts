@@ -3,6 +3,7 @@ import path from "node:path"
 
 export type PostMetadata = {
   title: string
+  description?: string
   date: string
 }
 

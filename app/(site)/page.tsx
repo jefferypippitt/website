@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { ArrowRightFromLineIcon } from "lucide-react"
 import Link from "next/link"
 import { ViewTransition } from "react"
@@ -11,6 +12,12 @@ const links = [
   { href: "/blog", name: "blog", label: "Blog" },
   { href: "/contact", name: "contact", label: "Contact" },
 ]
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+}
 
 export default function Page() {
   return (
