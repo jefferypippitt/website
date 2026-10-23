@@ -5,6 +5,7 @@ import { ViewTransition } from "react"
 
 import FrameworkLoop from "@/components/framework-loop"
 import PageTransition from "@/components/page-transition"
+import GithubActivity from "@/features/home/components/github-activity"
 
 const links = [
   { href: "/about", name: "about", label: "About Me" },
@@ -53,6 +54,7 @@ export default function Page() {
             </li>
           ))}
         </ul>
+        <GithubActivity />
       </div>
     </PageTransition>
   )
