@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google"
 
 import "./globals.css"
 import "./view-transitions.css"
+import BackTransitions from "@/components/back-transitions"
 import ThemeProvider from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toast"
 import { site } from "@/lib/site"
@@ -70,6 +71,7 @@ export default function RootLayout({
           {children}
           <Toaster />
         </ThemeProvider>
+        <BackTransitions />
       </body>
     </html>
   )
