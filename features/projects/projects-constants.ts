@@ -45,3 +45,36 @@ export const projects = [
     year: 2024,
   },
 ]
+
+export const archivedProjects = [
+  {
+    name: "eleven-agent",
+    description: "Voice agent built with ElevenLabs and Next.js.",
+    href: "https://github.com/jefferypippitt/eleven-agent",
+    year: 2025,
+  },
+  {
+    name: "ai-elements",
+    description: "Chat interface built with AI Elements and AI SDK 5.",
+    href: "https://github.com/jefferypippitt/ai-elements",
+    year: 2025,
+  },
+  {
+    name: "vercel-ai-sdk-5",
+    description: "Streaming chat exploring the Vercel AI SDK.",
+    href: "https://github.com/jefferypippitt/vercel-ai-sdk-5",
+    year: 2025,
+  },
+  {
+    name: "color-palette-generator",
+    description: "AI-generated color palettes from a prompt.",
+    href: "https://github.com/jefferypippitt/color-palette-generator",
+    year: 2025,
+  },
+  {
+    name: "next-view-transitions",
+    description: "Page transitions with the View Transitions API in Next.js.",
+    href: "https://github.com/jefferypippitt/next-view-transitions",
+    year: 2025,
+  },
+]

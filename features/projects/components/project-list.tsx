@@ -1,6 +1,13 @@
-import { projects } from "@/features/projects/projects-constants"
-
-export default function ProjectList() {
+export default function ProjectList({
+  projects,
+}: {
+  projects: {
+    name: string
+    description: string
+    href: string
+    year: number
+  }[]
+}) {
   return (
     <ul className="flex flex-col gap-3 text-sm text-muted-foreground">
       {projects.map((project) => (
