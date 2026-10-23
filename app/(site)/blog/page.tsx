@@ -1,9 +1,18 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { ViewTransition } from "react"
 
 import PageTitle from "@/components/page-title"
 import PageTransition from "@/components/page-transition"
 import { getPosts } from "@/lib/posts"
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description: "Posts by Jeffery Pippitt on building for the web.",
+  alternates: {
+    canonical: "/blog",
+  },
+}
 
 export default async function Page() {
   const posts = await getPosts()

@@ -1,6 +1,39 @@
+import type { Metadata } from "next"
+
 import PageTitle from "@/components/page-title"
 import PageTransition from "@/components/page-transition"
 import { formatDate, getPost, getPostSlugs } from "@/lib/posts"
+import { site } from "@/lib/site"
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
+  const { metadata } = await getPost(slug)
+  const url = `/blog/${slug}`
+  const description = metadata.description ?? site.description
+
+  return {
+    title: metadata.title,
+    description,
+    alternates: {
+      canonical: url,
+    },
+    // Replaces the root openGraph, so siteName and locale are repeated here
+    openGraph: {
+      type: "article",
+      locale: "en_US",
+      siteName: site.name,
+      url,
+      title: metadata.title,
+      description,
+      publishedTime: metadata.date,
+      authors: [site.name],
+    },
+  }
+}
 
 export default async function Page({
   params,

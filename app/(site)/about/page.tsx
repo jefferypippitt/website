@@ -1,8 +1,17 @@
+import type { Metadata } from "next"
 import AtollWallpaper from "@/components/atoll-wallpaper"
 import PageTitle from "@/components/page-title"
 import PageTransition from "@/components/page-transition"
 import Interests from "@/features/about/components/interests"
 import Socials from "@/features/about/components/socials"
+
+export const metadata: Metadata = {
+  title: "About",
+  description: "About Jeffery Pippitt: socials and interests.",
+  alternates: {
+    canonical: "/about",
+  },
+}
 
 export default function Page() {
   return (
