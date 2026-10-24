@@ -1,21 +1,17 @@
-# Next.js template
+# Jeffery Pippitt
 
-This is a Next.js template with shadcn/ui.
+My personal website
 
-## Adding components
-
-To add components to your app, run the following command:
+## Running locally
 
 ```bash
-npx shadcn@latest add button
+pnpm install
+cp .env.example .env.local
+pnpm dev
 ```
 
-This will place the ui components in the `components` directory.
+Fill in `.env.local` to use the contact form; everything else works without it.
 
-## Using components
+## License
 
-To use the components in your app, import them as follows:
-
-```tsx
-import { Button } from "@/components/ui/button";
-```
+Code is [MIT](LICENSE). Writing, artwork, and other content in `content/` and `public/` are © Jeffery Pippitt, all rights reserved.
