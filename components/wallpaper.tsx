@@ -1,7 +1,8 @@
 "use client"
 
 import { usePathname } from "next/navigation"
-import { ViewTransition } from "react"
+
+import WallpaperTransition from "@/components/wallpaper-transition"
 
 // Halftone wallpapers on the same dot grid as the atoll, one per section: a
 // Marshallese outrigger canoe on Home, the 24-point star from the flag of
@@ -28,12 +29,7 @@ export default function Wallpaper() {
   }
 
   return (
-    <ViewTransition
-      key={mask}
-      enter="wallpaper"
-      exit="wallpaper"
-      default="none"
-    >
+    <WallpaperTransition key={mask}>
       <div
         aria-hidden
         className="pointer-events-none flex justify-center md:fixed md:inset-y-0 md:right-0 md:left-1/2 md:-z-10 md:items-start md:justify-end md:p-6"
@@ -42,6 +38,6 @@ export default function Wallpaper() {
           className={`aspect-square max-h-full w-full max-w-lg bg-muted-foreground/25 ${mask}`}
         />
       </div>
-    </ViewTransition>
+    </WallpaperTransition>
   )
 }

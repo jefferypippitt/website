@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ViewTransition } from "react"
 
 import PageTitle from "@/components/page-title"
 import PageTransition from "@/components/page-transition"
+import TitleMorph from "@/components/title-morph"
 import { getPosts } from "@/lib/posts"
 
 export const metadata: Metadata = {
@@ -33,15 +33,14 @@ export default async function Page() {
                   <span className="shrink-0 font-mono">
                     {post.metadata.date.slice(0, 4)}
                   </span>
-                  <ViewTransition
-                    name={`title-post-${post.slug}`}
-                    share="text-morph"
-                    default="none"
-                  >
-                    <span className="text-foreground">
+                  <TitleMorph name={`post-${post.slug}`}>
+                    <span
+                      data-title-morph={`post-${post.slug}`}
+                      className="text-foreground"
+                    >
                       {post.metadata.title}
                     </span>
-                  </ViewTransition>
+                  </TitleMorph>
                 </Link>
               </li>
             ))}

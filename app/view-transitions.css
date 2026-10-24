@@ -1,67 +1,18 @@
-:root {
-  --duration-exit: 150ms;
-  --duration-enter: 210ms;
-  --duration-move: 400ms;
-}
-
-@keyframes fade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slide {
-  from {
-    translate: var(--slide-offset);
-  }
-  to {
-    translate: 0;
-  }
-}
-
-/* Page content: short slide + fade forward. */
-::view-transition-old(.nav-forward) {
-  --slide-offset: -16px;
-  animation:
-    var(--duration-exit) ease-in both fade reverse,
-    var(--duration-move) ease-in-out both slide reverse;
-}
-::view-transition-new(.nav-forward) {
-  --slide-offset: 16px;
-  animation:
-    var(--duration-enter) ease-out var(--duration-exit) both fade,
-    var(--duration-move) ease-in-out both slide;
-}
-
-/* Page content: same slide + fade, reversed for going back. */
-::view-transition-old(.nav-back) {
-  --slide-offset: 16px;
-  animation:
-    var(--duration-exit) ease-in both fade reverse,
-    var(--duration-move) ease-in-out both slide reverse;
-}
-::view-transition-new(.nav-back) {
-  --slide-offset: -16px;
-  animation:
-    var(--duration-enter) ease-out var(--duration-exit) both fade,
-    var(--duration-move) ease-in-out both slide;
-}
-
-/* Wallpapers: the flag star and the atoll crossfade in place, slower than
-   the page so the backdrop settles while the content slides. */
-::view-transition-old(.wallpaper) {
-  animation: var(--duration-move) ease-in both fade reverse;
-}
+/* Pages and wallpapers animate from <ViewTransition> callbacks (see
+   lib/view-transitions.ts) because Safari skips repeated CSS animations on
+   view transition pseudo-elements. These rules only switch off the
+   browser's default crossfade for them. */
+::view-transition-old(.page),
+::view-transition-new(.page),
+::view-transition-old(.wallpaper),
 ::view-transition-new(.wallpaper) {
-  animation: var(--duration-move) ease-out var(--duration-exit) both fade;
+  animation: none;
 }
 
-/* Homepage link label glides into the page heading. */
+/* Homepage link label glides into the page heading. The glide itself runs
+   from TitleMorph's onShare, so the group's default animation is off. */
 ::view-transition-group(.text-morph) {
-  animation-duration: var(--duration-move);
+  animation: none;
 }
 ::view-transition-old(.text-morph) {
   display: none;

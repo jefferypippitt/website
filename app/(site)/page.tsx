@@ -1,10 +1,10 @@
 import type { Metadata } from "next"
 import { ArrowRightFromLineIcon } from "lucide-react"
 import Link from "next/link"
-import { ViewTransition } from "react"
 
 import FrameworkLoop from "@/components/framework-loop"
 import PageTransition from "@/components/page-transition"
+import TitleMorph from "@/components/title-morph"
 import GithubActivity from "@/features/home/components/github-activity"
 
 const links = [
@@ -43,13 +43,12 @@ export default function Page() {
                 transitionTypes={["nav-forward"]}
                 className="hover:text-foreground"
               >
-                <ViewTransition
-                  name={`title-${link.name}`}
-                  share="text-morph"
-                  default="none"
-                >
-                  <span>{link.label}</span>
-                </ViewTransition>
+                <TitleMorph name={link.name}>
+                  {/* inline-block: Safari can't snapshot an inline element */}
+                  <span data-title-morph={link.name} className="inline-block">
+                    {link.label}
+                  </span>
+                </TitleMorph>
               </Link>
             </li>
           ))}

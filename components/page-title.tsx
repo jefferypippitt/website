@@ -1,4 +1,4 @@
-import { ViewTransition } from "react"
+import TitleMorph from "@/components/title-morph"
 
 export default function PageTitle({
   name,
@@ -8,8 +8,10 @@ export default function PageTitle({
   children: React.ReactNode
 }) {
   return (
-    <ViewTransition name={`title-${name}`} share="text-morph" default="none">
-      <h1 className="text-sm font-medium">{children}</h1>
-    </ViewTransition>
+    <TitleMorph name={name}>
+      <h1 data-title-morph={name} className="text-sm font-medium">
+        {children}
+      </h1>
+    </TitleMorph>
   )
 }
