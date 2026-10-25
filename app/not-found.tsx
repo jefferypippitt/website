@@ -2,7 +2,6 @@ import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
 
-// Renders outside the (site) layout, so there's no navbar or footer here.
 export default function NotFound() {
   return (
     <main className="flex min-h-svh flex-col items-center justify-center gap-6 p-6 text-center">

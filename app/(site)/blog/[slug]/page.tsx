@@ -19,7 +19,6 @@ export async function generateMetadata({
     alternates: {
       canonical: url,
     },
-    // Replaces the root openGraph, so siteName and locale are repeated here
     openGraph: {
       type: "article",
       locale: "en_US",

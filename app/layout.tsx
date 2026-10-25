@@ -22,7 +22,6 @@ export const metadata: Metadata = {
   appleWebApp: {
     title: site.name,
   },
-  // og/twitter title and description fall back to each page's own
   openGraph: {
     type: "website",
     locale: "en_US",

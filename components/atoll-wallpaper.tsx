@@ -1,7 +1,3 @@
-// Halftone of Kwajalein Atoll, sampled from a Landsat 7 image (public domain).
-// The SVG is used as a mask so the dots take the theme's muted color.
-// On phones it sits below the content; from md up it's fixed to the top
-// right of the screen, within the right half.
 export default function AtollWallpaper() {
   return (
     <div

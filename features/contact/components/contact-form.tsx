@@ -17,7 +17,6 @@ import { sendMessage, type ContactState } from "@/features/contact/actions"
 
 const initialState: ContactState = { status: "idle" }
 
-// Field errors stay inline next to their inputs; the overall result is a toast.
 async function submit(prevState: ContactState, formData: FormData) {
   const result = await sendMessage(prevState, formData)
 

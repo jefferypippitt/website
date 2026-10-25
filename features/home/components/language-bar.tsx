@@ -14,19 +14,14 @@ type Segment = {
 export default function LanguageBar({ segments }: { segments: Segment[] }) {
   const [index, setIndex] = useState(0)
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined)
-  // Pointer position along the bar in ticks, only while hovering or dragging
   const [pointer, setPointer] = useState<number | null>(null)
 
-  // Each tick knows which language it belongs to, so a pointer position maps
-  // straight to a language
   const owners = segments.flatMap((segment, i) =>
     Array.from({ length: segment.ticks }, () => i)
   )
 
-  // Clear a pending settle if the bar unmounts
   useEffect(() => () => clearTimeout(timer.current), [])
 
-  // Return to the top language once the pointer or finger has left
   function settle(delay: number) {
     setPointer(null)
     clearTimeout(timer.current)
@@ -44,8 +39,6 @@ export default function LanguageBar({ segments }: { segments: Segment[] }) {
 
   const active = segments[index]
 
-  // Sound-bar meter: ticks near the pointer rise up to 1.65x, falling off
-  // with distance. A fixed per-tick level keeps the peak jagged like audio.
   function scale(i: number) {
     if (pointer === null) return 1
     const distance = i + 0.5 - pointer
@@ -56,9 +49,6 @@ export default function LanguageBar({ segments }: { segments: Segment[] }) {
 
   return (
     <>
-      {/* Hover to scrub with a mouse; on touch, tap to jump or press and
-          drag, while vertical swipes still scroll the page. Screen readers
-          get the list below instead. */}
       <div
         aria-hidden
         className="flex h-5 touch-pan-y items-center gap-[3px]"

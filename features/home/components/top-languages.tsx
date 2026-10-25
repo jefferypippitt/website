@@ -5,7 +5,6 @@ import { getTopLanguages } from "@/features/home/top-languages"
 
 const ticks = 40
 
-// GitHub's format: one decimal, trailing .0 dropped
 function formatPercent(percent: number) {
   return percent < 0.1 ? "<0.1%" : `${Number(percent.toFixed(1))}%`
 }
@@ -14,8 +13,6 @@ export default async function TopLanguages() {
   const languages = await getTopLanguages()
   if (!languages?.length) return null
 
-  // Every language gets at least one tick so the small ones stay visible;
-  // the rest are split by share, largest remainder first
   const counts = languages.map(() => 1)
   const spare = ticks - languages.length
   const exact = languages.map((l) => (l.percent / 100) * spare)

@@ -3,8 +3,6 @@
 import { useToggleTheme } from "@/components/theme-provider"
 import { Kbd } from "@/components/ui/kbd"
 
-// The footer's hotkey hint, also a button so phones can switch theme by
-// tapping it.
 export default function ThemeHint() {
   const toggleTheme = useToggleTheme()
 

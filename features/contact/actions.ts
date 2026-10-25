@@ -12,14 +12,10 @@ export type ContactState = {
 }
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-// Control characters plus Unicode direction overrides, which can make text
-// display differently from what it really says (like a disguised link).
 const HIDDEN_CHARS = /[\p{Cc}\u200E\u200F\u202A-\u202E\u2066-\u2069]/gu
-// Same, but keeps line breaks and tabs so a message's formatting survives.
 const HIDDEN_CHARS_EXCEPT_LINES =
   /(?![\n\t])[\p{Cc}\u200E\u200F\u202A-\u202E\u2066-\u2069]/gu
 
-// For single-line fields: line breaks become spaces, then hidden chars go.
 function cleanLine(value: FormDataEntryValue | null) {
   return String(value ?? "")
     .replace(/\s+/g, " ")
@@ -37,7 +33,6 @@ const SENT = "Thanks for reaching out."
 const FAILED = "Something went wrong. Try again later."
 const BUSY = "Couldn't send right now. Try again in a minute."
 
-// Resend errors that clear up on their own, so a retry from the visitor helps
 const TRANSIENT_ERRORS = new Set([
   "rate_limit_exceeded",
   "concurrent_idempotent_requests",
@@ -49,20 +44,16 @@ export async function sendMessage(
   _prevState: ContactState,
   formData: FormData
 ): Promise<ContactState> {
-  // Honeypot: real visitors never see this field, bots fill it in.
   if (formData.get("company")) {
     return { status: "success", message: SENT }
   }
 
-  // The name ends up in the email subject, so it must stay on one line.
   const values = {
     name: cleanLine(formData.get("name")),
     email: cleanLine(formData.get("email")),
     message: cleanMessage(formData.get("message")),
   }
 
-  // Blocks scripted posts that skip the page. Always passes in local dev.
-  // Values come back so a misjudged visitor doesn't lose their message.
   const { isBot } = await checkBotId()
   if (isBot) {
     return { status: "error", message: FAILED, values }
@@ -92,8 +83,6 @@ export async function sendMessage(
     return { status: "error", message: FAILED, values }
   }
 
-  // Same sender + same message within 24 hours is delivered once, so a
-  // retry or double submit never sends a duplicate.
   const digest = createHash("sha256")
     .update(`${values.email}\n${values.message}`)
     .digest("hex")

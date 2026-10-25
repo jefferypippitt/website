@@ -2,7 +2,6 @@ import "server-only"
 
 const username = "jefferypippitt"
 
-// Languages past this are folded into "Other" so the bar stays readable
 const maxLanguages = 10
 
 const query = `
@@ -51,7 +50,6 @@ async function fetchPage(token: string, cursor: string | null) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ query, variables: { login: username, cursor } }),
-    // POSTs with an Authorization header are only cached when opted in
     cache: "force-cache",
     next: { revalidate: 86400 },
   })
@@ -66,7 +64,6 @@ export async function getTopLanguages() {
   if (!token) return null
 
   try {
-    // Sum bytes per language across every repo, 100 repos per page
     const totals = new Map<string, { size: number; color: string | null }>()
     let cursor: string | null = null
     do {

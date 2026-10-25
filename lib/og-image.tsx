@@ -10,7 +10,6 @@ const geistMono = await readFile(
   join(fonts, "geist-mono/GeistMono-Regular.ttf")
 )
 
-// Shared 1200x630 card for the site and blog post share images.
 export function renderOgImage({
   title,
   subtitle,

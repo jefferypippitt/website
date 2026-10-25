@@ -140,7 +140,6 @@
   font-size: var(--typeset-size);
 }
 
-/* Match the homepage: headings are text-sm font-medium, same size as body. */
 @layer components {
   .typeset-article :where(h1, h2, h3, h4, h5, h6) {
     font-size: 1em;

@@ -34,15 +34,12 @@ function isTypingTarget(target: EventTarget | null) {
   )
 }
 
-// Switches between light and dark. Shared by the d hotkey and the footer
-// hint, which phones tap instead.
 export function useToggleTheme() {
   const { resolvedTheme, systemTheme, setTheme } = useTheme()
 
   return React.useCallback(() => {
     const next = resolvedTheme === "dark" ? "light" : "dark"
 
-    // Toggling back to the OS preference resumes following the system
     setTheme(next === systemTheme ? "system" : next)
   }, [resolvedTheme, systemTheme, setTheme])
 }
@@ -60,7 +57,6 @@ function ThemeHotkey() {
         return
       }
 
-      // Browser autofill fires keydown events without a key
       if (typeof event.key !== "string" || event.key.toLowerCase() !== "d") {
         return
       }

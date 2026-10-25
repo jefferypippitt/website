@@ -15,7 +15,6 @@ export default function FrameworkLoop() {
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
 
-  // Hovering or focusing the link holds the current framework
   useEffect(() => {
     if (paused) return
 

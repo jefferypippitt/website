@@ -2,9 +2,6 @@
 
 import { AnimatePresence, MotionConfig, motion } from "motion/react"
 
-// Rolls the old text up and out as the new text rolls in from below, keyed
-// by `id`. Shared by the framework loop and the language bar so every
-// changing label on the home page moves the same way.
 export default function RollingText({
   id,
   className,
