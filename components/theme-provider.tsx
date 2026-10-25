@@ -34,8 +34,21 @@ function isTypingTarget(target: EventTarget | null) {
   )
 }
 
-function ThemeHotkey() {
+// Switches between light and dark. Shared by the d hotkey and the footer
+// hint, which phones tap instead.
+export function useToggleTheme() {
   const { resolvedTheme, systemTheme, setTheme } = useTheme()
+
+  return React.useCallback(() => {
+    const next = resolvedTheme === "dark" ? "light" : "dark"
+
+    // Toggling back to the OS preference resumes following the system
+    setTheme(next === systemTheme ? "system" : next)
+  }, [resolvedTheme, systemTheme, setTheme])
+}
+
+function ThemeHotkey() {
+  const toggleTheme = useToggleTheme()
 
   React.useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -56,10 +69,7 @@ function ThemeHotkey() {
         return
       }
 
-      const next = resolvedTheme === "dark" ? "light" : "dark"
-
-      // Toggling back to the OS preference resumes following the system
-      setTheme(next === systemTheme ? "system" : next)
+      toggleTheme()
     }
 
     window.addEventListener("keydown", onKeyDown)
@@ -67,7 +77,7 @@ function ThemeHotkey() {
     return () => {
       window.removeEventListener("keydown", onKeyDown)
     }
-  }, [resolvedTheme, systemTheme, setTheme])
+  }, [toggleTheme])
 
   return null
 }

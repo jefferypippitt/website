@@ -1,7 +1,5 @@
 import type { Metadata } from "next"
 
-import PageTitle from "@/components/page-title"
-import PageTransition from "@/components/page-transition"
 import { formatDate, getPost, getPostSlugs } from "@/lib/posts"
 import { site } from "@/lib/site"
 
@@ -44,19 +42,17 @@ export default async function Page({
   const { Content, metadata } = await getPost(slug)
 
   return (
-    <PageTransition>
-      <div className="flex flex-col gap-6">
-        <div className="flex flex-col gap-3">
-          <PageTitle name={`post-${slug}`}>{metadata.title}</PageTitle>
-          <p className="text-sm text-muted-foreground">
-            Published on {formatDate(metadata.date)}
-          </p>
-        </div>
-        <div className="typeset typeset-article max-w-[37em]">
-          <Content />
-        </div>
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-3">
+        <h1 className="text-sm font-medium">{metadata.title}</h1>
+        <p className="text-sm text-muted-foreground">
+          Published on {formatDate(metadata.date)}
+        </p>
       </div>
-    </PageTransition>
+      <div className="typeset typeset-article max-w-[37em]">
+        <Content />
+      </div>
+    </div>
   )
 }
 

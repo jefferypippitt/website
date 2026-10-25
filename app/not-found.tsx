@@ -11,10 +11,7 @@ export default function NotFound() {
         <p>The page you’re looking for has wandered off, but don’t worry!</p>
         <p>Let’s get you back on track.</p>
       </div>
-      <Button
-        nativeButton={false}
-        render={<Link href="/" transitionTypes={["nav-back"]} />}
-      >
+      <Button nativeButton={false} render={<Link href="/" />}>
         Back to home
       </Button>
     </main>

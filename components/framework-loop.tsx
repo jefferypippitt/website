@@ -1,7 +1,8 @@
 "use client"
 
-import { AnimatePresence, MotionConfig, motion } from "motion/react"
 import { useEffect, useState } from "react"
+
+import RollingText from "@/components/rolling-text"
 
 const frameworks = [
   { name: "Next.js", href: "https://nextjs.org" },
@@ -10,22 +11,11 @@ const frameworks = [
   { name: "Astro", href: "https://astro.build" },
 ]
 
-const word = {
-  initial: {},
-  animate: { transition: { staggerChildren: 0.015 } },
-  exit: { transition: { staggerChildren: 0.015 } },
-}
-
-const letter = {
-  initial: { y: "100%", opacity: 0 },
-  animate: { y: "0%", opacity: 1 },
-  exit: { y: "-100%", opacity: 0 },
-}
-
 export default function FrameworkLoop() {
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
 
+  // Hovering or focusing the link holds the current framework
   useEffect(() => {
     if (paused) return
 
@@ -39,43 +29,22 @@ export default function FrameworkLoop() {
   const framework = frameworks[index]
 
   return (
-    <MotionConfig
-      reducedMotion="user"
-      transition={{ duration: 0.15, ease: "easeOut" }}
+    <span
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
     >
-      <span
-        className="relative inline-flex overflow-x-visible overflow-y-clip"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onFocus={() => setPaused(true)}
-        onBlur={() => setPaused(false)}
-      >
-        <AnimatePresence mode="popLayout" initial={false}>
-          <motion.a
-            key={framework.name}
-            href={framework.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={framework.name}
-            variants={word}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className="text-muted-foreground hover:text-foreground"
-          >
-            {framework.name.split("").map((char, i) => (
-              <motion.span
-                key={i}
-                variants={letter}
-                aria-hidden
-                className="inline-block whitespace-pre"
-              >
-                {char}
-              </motion.span>
-            ))}
-          </motion.a>
-        </AnimatePresence>
-      </span>
-    </MotionConfig>
+      <RollingText id={framework.name}>
+        <a
+          href={framework.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground hover:text-foreground"
+        >
+          {framework.name}
+        </a>
+      </RollingText>
+    </span>
   )
 }
