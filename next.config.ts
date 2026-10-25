@@ -1,5 +1,4 @@
 import createMDX from "@next/mdx"
-import { withBotId } from "botid/next/config"
 import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
@@ -12,4 +11,4 @@ const nextConfig: NextConfig = {
 
 const withMDX = createMDX({})
 
-export default withBotId(withMDX(nextConfig))
+export default withMDX(nextConfig)
