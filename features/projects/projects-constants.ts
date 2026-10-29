@@ -7,16 +7,28 @@ export const projects = [
     year: 2026,
   },
   {
+    name: "uiception",
+    description: "Open source registry index.",
+    href: "https://uiception.com",
+    year: 2026,
+  },
+  {
+    name: "genuicn",
+    description: "shadcn registry of generative UI cards for chatbots.",
+    href: "https://github.com/jefferypippitt/genuicn",
+    year: 2026,
+  },
+  {
+    name: "LTD Craft",
+    description: "Living technical drawings that simulate real scenes.",
+    href: "https://ltdcraft.dev",
+    year: 2026,
+  },
+  {
     name: "jevelements",
     description:
       "Chrome extension and Next.js backend that turns a page section into a Next.js app.",
     href: "https://github.com/jefferypippitt/jevelements",
-    year: 2026,
-  },
-  {
-    name: "uiception",
-    description: "Open source registry index.",
-    href: "https://uiception.com",
     year: 2026,
   },
   {
