@@ -23,6 +23,7 @@ export default function Wallpaper() {
       className="pointer-events-none flex justify-center md:fixed md:inset-y-0 md:right-0 md:left-1/2 md:-z-10 md:items-start md:justify-end md:p-6"
     >
       <div
+        data-wallpaper={section || "home"}
         className={`aspect-square max-h-full w-full max-w-lg bg-muted-foreground/25 ${mask}`}
       />
     </div>

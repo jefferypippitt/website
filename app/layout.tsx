@@ -1,5 +1,6 @@
 import { Analytics } from "@vercel/analytics/next"
 import { GeistPixelCircle } from "geist/font/pixel"
+import { GeistSerifRegular } from "geist/font/serif/regular"
 import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google"
 
@@ -70,12 +71,24 @@ export default function RootLayout({
         "antialiased",
         fontMono.variable,
         GeistPixelCircle.variable,
+        GeistSerifRegular.variable,
         "font-sans",
         geist.variable,
         geistTypeset.variable,
         jetbrainsMono.variable
       )}
     >
+      <head>
+        {/* Hides the intro before first paint for returning visitors and reduced motion. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(sessionStorage.getItem("intro-seen")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.setAttribute("data-intro-seen","")}catch(e){}`,
+          }}
+        />
+        <noscript>
+          <style>{"[data-intro]{display:none}"}</style>
+        </noscript>
+      </head>
       <body>
         <ThemeProvider>
           {children}
