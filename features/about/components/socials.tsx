@@ -3,8 +3,8 @@ import { socials } from "@/features/about/about-constants"
 export default function Socials() {
   return (
     <section className="flex flex-col gap-6">
-      <h2 className="text-sm font-medium">Socials</h2>
-      <ul className="flex flex-col gap-3 text-sm text-muted-foreground">
+      <h2 className="type-subtitle font-medium">Socials</h2>
+      <ul className="flex flex-col gap-2 type-body text-muted-foreground">
         {socials.map((social) => (
           <li key={social.label}>
             <a

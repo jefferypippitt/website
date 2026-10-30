@@ -10,7 +10,7 @@ export default function ThemeHint() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="cursor-pointer text-xs text-muted-foreground"
+      className="cursor-pointer type-caption text-muted-foreground"
     >
       (Press <Kbd>d</Kbd> to switch theme)
     </button>

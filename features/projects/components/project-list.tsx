@@ -9,7 +9,7 @@ export default function ProjectList({
   }[]
 }) {
   return (
-    <ul className="flex flex-col gap-3 text-sm text-muted-foreground">
+    <ul className="flex flex-col gap-2 type-body text-muted-foreground">
       {projects.map((project) => (
         <li key={project.name}>
           <a

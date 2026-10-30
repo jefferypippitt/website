@@ -43,12 +43,12 @@ export default async function Page({
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-3">
-        <h1 className="text-sm font-medium">{metadata.title}</h1>
-        <p className="text-sm text-muted-foreground">
+        <h1 className="type-title font-medium">{metadata.title}</h1>
+        <p className="type-caption text-muted-foreground">
           Published on {formatDate(metadata.date)}
         </p>
       </div>
-      <div className="typeset typeset-article max-w-[37em]">
+      <div className="typeset typeset-docs max-w-[42em]">
         <Content />
       </div>
     </div>

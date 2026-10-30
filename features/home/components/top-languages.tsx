@@ -32,7 +32,7 @@ export default async function TopLanguages() {
   }))
 
   return (
-    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+    <div className="flex items-center gap-2 type-body text-muted-foreground">
       <CodeIcon className="size-4 shrink-0" aria-hidden />
       <LanguageBar segments={segments} />
     </div>

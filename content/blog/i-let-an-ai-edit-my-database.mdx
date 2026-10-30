@@ -1,0 +1,138 @@
+export const metadata = {
+  title: "I Let an AI Edit My Database",
+  description:
+    "How I went from giving an AI assistant a locked-down Neon login to letting it manage stats, events, athletes, and every UFC ranking on fightembedded.com, with me approving every risky change.",
+  date: "2026-10-30",
+}
+
+[Fight Embedded](https://www.fightembedded.com/) tracks hundreds of UFC athletes, and keeping their records and rankings current by hand got old. So I connected Grok Bot to the site. It started with one locked-down database login and ended up keeping every division and both pound-for-pound lists in line with UFC, with me approving each change.
+
+## Step 1: A login of its own
+
+My main database URL can read everything, including users and sessions, so the bot doesn't get that one. Grok Bot asked for one thing instead: a connection string for a limited database role. Here's how I set it up in [Neon](https://neon.com/):
+
+1. I generated a strong password with `openssl rand -hex 32`.
+2. In the project's **SQL Editor**, I pasted this with that password and clicked **Run**:
+
+   ```sql
+   CREATE ROLE stats_bot WITH LOGIN PASSWORD '...';
+   GRANT USAGE ON SCHEMA public TO stats_bot;
+   GRANT SELECT ON public."Athlete" TO stats_bot;
+   GRANT UPDATE ("wins","losses","draws","winsByKo","winsBySubmission",
+     "rank","poundForPoundRank","followers","age","weightDivision",
+     "retired","updatedAt") ON public."Athlete" TO stats_bot;
+   ```
+
+3. I clicked **Connect**, picked the `neondb` database and the `stats_bot` role, and copied the `postgresql://` connection string.
+4. I pasted it into Grok Bot's secret field, `NEON_STATS_DATABASE_URL`.
+
+Postgres enforces those grants, so the limits hold even if the bot gets something wrong.
+
+## Step 2: A bot API route
+
+The first update landed in Neon, but the live site didn't change. Fight Embedded caches pages for days, and the cache only clears when I save from the dashboard.
+
+So Grok Bot created a new API route under `/api/bot` in my GitHub repository. It runs the same validation and cache clearing as the dashboard, so changes go live in seconds. Over a few pull requests it grew to cover:
+
+<table>
+  <thead>
+    <tr><th>Area</th><th>What the bot does</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Stats</td><td>Updates records, KO and submission wins, weight divisions, ages, and followers</td></tr>
+    <tr><td>Athletes</td><td>Full CRUD on the <code>Athlete</code> table, including adding athletes who show up in the rankings but not on the site</td></tr>
+    <tr><td>Events</td><td>Full CRUD on the <code>Event</code> table from UFC.com, checking for duplicates and marking events completed or cancelled</td></tr>
+    <tr><td>Rankings</td><td>Replaces a whole division's ranking in one request</td></tr>
+    <tr><td>Pound-for-pound</td><td>Replaces the men's or women's pound-for-pound list in one request</td></tr>
+  </tbody>
+</table>
+
+## Step 3: Tell it where to look
+
+Before letting it update anyone, I pinned down its sources. I told Grok Bot to use specific sites, and it saved that as a standing rule:
+
+<Chat>
+  <ChatMessage from="me">
+    Here's the flow I want for every athlete. Use Alexander Volkanovski as the example:
+
+    - Record (W-L-D), KO and submission wins, and weight division: [UFC athlete page](https://www.ufc.com/athlete/alexander-volkanovski)
+    - Age and country: [ESPN athlete page](https://www.espn.com/mma/fighter/_/id/3949584/alexander-volkanovski)
+    - Followers: Instagram and X from the UFC.com athlete page
+
+    Use this for every athlete. Just swap the end of each link for the name of the athlete.
+  </ChatMessage>
+  <ChatMessage from="bot">
+    Got it, and I've saved that as my standing rule. Record, KO and submission wins, and weight division come from the UFC athlete page. Age and country come from ESPN. Followers are Instagram plus X.
+  </ChatMessage>
+</Chat>
+
+## Step 4: Rankings and weight-class moves
+
+Athletes move up and down weight classes, and my rankings didn't always keep up. When the bot compared my divisions against [UFC's rankings](https://www.ufc.com/rankings), a lot didn't match.
+
+### What it caught
+
+- Athletes still listed in a division they'd left, like Rakić after moving up to heavyweight, which broke that division's ranking
+- Two #13s on my heavyweight page
+- Athletes who weren't in my database at all
+- Unranked athletes who had moved into the rankings, which also broke the rankings
+
+### The guardrails
+
+Fixing that means creating missing athletes, moving others to their correct divisions, bringing newly ranked athletes in, and re-ranking both sides, which is easy to get wrong. The rankings endpoint has three guardrails:
+
+1. It takes the **full list** for a division, with unique ranks in order. No gaps, no duplicates.
+2. Every athlete has to be in that division and not retired.
+3. Any request can be a **dry run** that returns the before-and-after diff without saving. The bot sends me that diff, and nothing changes until I approve.
+
+<Callout title="Deletes have a guardrail too">
+  The API refuses to delete an athlete who's still ranked. The bot has to remove them from the division or pound-for-pound rankings first, or explicitly force it.
+</Callout>
+
+## A single pass in practice
+
+Here's what that looks like when I ask for the men's pound-for-pound list:
+
+<Chat>
+  <ChatMessage from="me">
+    Can you update the male p4p list?
+  </ChatMessage>
+  <ChatMessage from="bot">
+    Got it. I'm pulling the men's pound-for-pound rankings from UFC's page now, and I'll show you the preview before saving anything.
+  </ChatMessage>
+  <ChatMessage from="bot">
+  I pulled the men's pound-for-pound list from UFC's rankings page. All 15 athletes are already on your site, and the preview checked out. Here's what would change:
+
+1. Islam Makhachev, no change
+2. Alexander Volkanovski, up from 3
+3. Justin Gaethje, new to the list
+4. Petr Yan, up from 5
+5. Ilia Topuria, down from 2
+6. Joshua Van, up from 9
+7. Sean Strickland, no change
+8. Tom Aspinall, down from 6
+9. Merab Dvalishvili, down from 8
+10. Alex Pereira, down from 4
+11. Ciryl Gane, new to the list
+12. Khamzat Chimaev, down from 10
+13. Arman Tsarukyan, up from 15
+14. Alexandre Pantoja, down from 11
+15. Carlos Ulberg, down from 14
+
+Charles Oliveira and Dricus Du Plessis would drop off the list. No retired athletes or anyone else would change.
+  </ChatMessage>
+  <ChatMessage from="me">
+    That looks good. Approve the changes.
+  </ChatMessage>
+  <ChatMessage from="bot">
+    Men's pound-for-pound now matches UFC's list on your live site, from Makhachev at #1 through Ulberg at #15. The update changed 15 athletes, which includes removing Oliveira and Du Plessis from the list.
+  </ChatMessage>
+</Chat>
+
+That's the whole loop now: Grok Bot pulls the list from UFC, I check the preview, and nothing saves until I approve it.
+
+---
+
+This is still a beta setup. The whole bot API went in over a couple of days, and I'm still finding edge cases, so treat it as an experiment, not a pattern to copy as is. The bot reads other sites and can get things wrong, which is why the database role, the guardrails, and the approval step exist.
+
+If you try something like this on your own site, it's at your own risk. Start with the smallest permission that's useful, put every write behind a code path your app already trusts, and make dry runs the default for anything you'd hate to get wrong.

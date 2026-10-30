@@ -5,6 +5,51 @@
 
 @custom-variant dark (&:is(.dark *));
 
+:root {
+    --type-display: 2rem;
+    --type-display-leading: 2.5rem;
+    --type-title: 1.125rem;
+    --type-title-leading: 1.625rem;
+    --type-subtitle: 1rem;
+    --type-subtitle-leading: 1.5rem;
+    --type-body: 0.9375rem;
+    --type-body-leading: 1.5rem;
+    --type-caption: 0.875rem;
+    --type-caption-leading: 1.25rem;
+    --type-micro: 0.75rem;
+    --type-micro-leading: 1rem;
+}
+
+@utility type-display {
+    font-size: var(--type-display);
+    line-height: var(--tw-leading, var(--type-display-leading));
+}
+
+@utility type-title {
+    font-size: var(--type-title);
+    line-height: var(--tw-leading, var(--type-title-leading));
+}
+
+@utility type-subtitle {
+    font-size: var(--type-subtitle);
+    line-height: var(--tw-leading, var(--type-subtitle-leading));
+}
+
+@utility type-body {
+    font-size: var(--type-body);
+    line-height: var(--tw-leading, var(--type-body-leading));
+}
+
+@utility type-caption {
+    font-size: var(--type-caption);
+    line-height: var(--tw-leading, var(--type-caption-leading));
+}
+
+@utility type-micro {
+    font-size: var(--type-micro);
+    line-height: var(--tw-leading, var(--type-micro-leading));
+}
+
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: var(--font-sans);
@@ -140,6 +185,15 @@
   font-size: var(--typeset-size);
 }
 
+.typeset-docs {
+  --typeset-font-body: var(--font-geist);
+  --typeset-font-heading: var(--font-geist);
+  --typeset-font-mono: var(--font-jetbrains-mono);
+  --typeset-size: var(--type-body);
+  --typeset-leading: 1.75;
+  --typeset-flow: 1.25em;
+}
+
 @layer components {
   .typeset-article :where(h1, h2, h3, h4, h5, h6) {
     font-size: 1em;
@@ -148,5 +202,28 @@
     letter-spacing: normal;
     text-transform: none;
     color: var(--color-foreground);
+  }
+
+  .typeset-docs :where(h2) {
+    font-size: calc(16em / 15);
+    font-weight: 500;
+  }
+
+  .typeset-docs :where(h3) {
+    font-size: 1em;
+    font-weight: 500;
+  }
+
+  .typeset-docs
+    :where(
+      :not(pre) > code,
+      kbd,
+      pre,
+      .footnotes,
+      [data-footnotes],
+      figcaption,
+      caption
+    ) {
+    font-size: calc(14em / 15);
   }
 }

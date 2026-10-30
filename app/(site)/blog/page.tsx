@@ -17,8 +17,8 @@ export default async function Page() {
   return (
     <div className="flex flex-col gap-10">
       <section className="flex flex-col gap-6">
-        <h1 className="text-sm font-medium">Blog</h1>
-        <ul className="flex flex-col gap-3 text-sm text-muted-foreground">
+        <h1 className="type-subtitle font-medium">Blog</h1>
+        <ul className="flex flex-col gap-2 type-body text-muted-foreground">
           {posts.map((post) => (
             <li key={post.slug}>
               <Link

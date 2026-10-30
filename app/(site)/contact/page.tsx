@@ -14,8 +14,8 @@ export default function Page() {
   return (
     <div className="flex flex-col gap-10">
       <section className="flex flex-col gap-6">
-        <h1 className="text-sm font-medium">Contact</h1>
-        <p className="text-sm text-muted-foreground">
+        <h1 className="type-subtitle font-medium">Contact</h1>
+        <p className="type-body text-muted-foreground">
           Got a project or a question?
         </p>
         <ContactForm />

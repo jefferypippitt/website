@@ -23,7 +23,7 @@ export default function Page() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="flex items-center gap-2 text-sm font-medium">
+        <h1 className="flex items-center gap-2 type-subtitle font-medium">
           <ArrowRightFromLineIcon
             className="size-4 text-muted-foreground"
             aria-hidden
@@ -33,7 +33,7 @@ export default function Page() {
           </span>
         </h1>
       </div>
-      <ul className="flex flex-col gap-3 text-sm text-muted-foreground">
+      <ul className="flex flex-col gap-2 type-body text-muted-foreground">
         {links.map((link) => (
           <li key={link.href}>
             <Link href={link.href} className="hover:text-foreground">

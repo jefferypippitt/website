@@ -17,11 +17,11 @@ export default function Page() {
   return (
     <div className="flex flex-col gap-10">
       <section className="flex flex-col gap-6">
-        <h1 className="text-sm font-medium">Projects</h1>
+        <h1 className="type-subtitle font-medium">Projects</h1>
         <ProjectList projects={projects} />
       </section>
       <section className="flex flex-col gap-6">
-        <h2 className="text-sm font-medium">Archived</h2>
+        <h2 className="type-subtitle font-medium">Archived</h2>
         <ProjectList projects={archivedProjects} />
       </section>
     </div>

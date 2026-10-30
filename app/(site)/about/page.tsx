@@ -16,8 +16,8 @@ export default function Page() {
     <>
       <div className="relative z-10 flex flex-col gap-10">
         <section className="flex flex-col gap-6">
-          <h1 className="text-sm font-medium">About Me</h1>
-          <p className="font-mono text-sm text-muted-foreground">
+          <h1 className="type-subtitle font-medium">About Me</h1>
+          <p className="font-mono type-caption text-muted-foreground">
             8°43′N 167°44′E
           </p>
         </section>

@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="flex items-center justify-between gap-4">
       <ThemeHint />
-      <p className="text-xs text-muted-foreground">
+      <p className="type-caption text-muted-foreground">
         © <CurrentYear initial={new Date().getFullYear()} />
       </p>
     </footer>

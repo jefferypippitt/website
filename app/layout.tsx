@@ -1,7 +1,7 @@
 import { Analytics } from "@vercel/analytics/next"
 import { GeistPixelCircle } from "geist/font/pixel"
 import type { Metadata, Viewport } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google"
 
 import "./globals.css"
 import ThemeProvider from "@/components/theme-provider"
@@ -47,6 +47,16 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
+const geistTypeset = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+})
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -61,7 +71,9 @@ export default function RootLayout({
         fontMono.variable,
         GeistPixelCircle.variable,
         "font-sans",
-        geist.variable
+        geist.variable,
+        geistTypeset.variable,
+        jetbrainsMono.variable
       )}
     >
       <body>
