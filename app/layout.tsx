@@ -79,10 +79,10 @@ export default function RootLayout({
       )}
     >
       <head>
-        {/* Hides the intro before first paint for returning visitors and reduced motion. */}
+        {/* Hides the intro before first paint outside the homepage, for returning visitors and reduced motion. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(sessionStorage.getItem("intro-seen")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.setAttribute("data-intro-seen","")}catch(e){}`,
+            __html: `try{if(location.pathname!=="/"||localStorage.getItem("intro-seen")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.setAttribute("data-intro-seen","")}catch(e){}`,
           }}
         />
         <noscript>

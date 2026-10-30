@@ -127,6 +127,9 @@ export default function IntroOverlay() {
   const backdrop = useMotionValue(1)
   const canoeOpacity = useMotionValue(0)
   const name = useTransform(travel, [0, 0.3], [1, 0])
+  const pointerEvents = useTransform(() =>
+    backdrop.get() < 1 ? "none" : "auto"
+  )
   const left = useSide(progress, 0)
   const right = useSide(progress, 1)
   const base = useSide(progress, 2)
@@ -148,7 +151,7 @@ export default function IntroOverlay() {
       if (cancelled) return
 
       try {
-        sessionStorage.setItem("intro-seen", "1")
+        localStorage.setItem("intro-seen", "1")
       } catch {}
       const wallpaper = document.querySelector('[data-wallpaper="home"]')
       if (wallpaper && triangle.current && canoe.current) {
@@ -183,6 +186,7 @@ export default function IntroOverlay() {
           data-intro
           aria-hidden
           exit="out"
+          style={{ pointerEvents }}
           variants={{ out: { opacity: 0, transition: blur } }}
           className="fixed inset-0 z-100 flex items-center justify-center [--a:min(78vw,26rem)] in-data-intro-seen:hidden"
         >
