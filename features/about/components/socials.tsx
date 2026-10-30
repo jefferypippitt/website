@@ -11,9 +11,19 @@ export default function Socials() {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-opacity hover:opacity-70"
+              className="inline-flex items-center gap-2 transition-opacity hover:opacity-70"
             >
-              <span className="text-foreground">{social.label}:</span>{" "}
+              <span className="flex size-4 shrink-0 items-center justify-center">
+                <social.icon.light
+                  className={`${social.icon.size} dark:hidden`}
+                  aria-hidden
+                />
+                <social.icon.dark
+                  className={`hidden ${social.icon.size} dark:block`}
+                  aria-hidden
+                />
+              </span>
+              <span className="sr-only">{social.label}:</span>
               {social.handle}
             </a>
           </li>

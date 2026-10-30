@@ -29,12 +29,22 @@ export default function FrameworkLoop() {
 
   return (
     <span
+      className="inline-grid whitespace-nowrap max-sm:grid max-sm:w-fit"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
-      <RollingText id={framework.name}>
+      {frameworks.map((item) => (
+        <span
+          key={item.name}
+          aria-hidden
+          className="invisible col-start-1 row-start-1"
+        >
+          {item.name}
+        </span>
+      ))}
+      <RollingText id={framework.name} className="col-start-1 row-start-1">
         <a
           href={framework.href}
           target="_blank"
