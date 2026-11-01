@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 
+import { JetBrainsMono } from "@/app/fonts/jetbrains-mono"
 import { formatDate, getPost, getPostSlugs } from "@/lib/posts"
 import { site } from "@/lib/site"
 
@@ -48,7 +49,9 @@ export default async function Page({
           Published on {formatDate(metadata.date)}
         </p>
       </div>
-      <div className="typeset typeset-docs max-w-[42em]">
+      <div
+        className={`typeset typeset-docs max-w-[42em] ${JetBrainsMono.variable}`}
+      >
         <Content />
       </div>
     </div>

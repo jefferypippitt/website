@@ -190,8 +190,8 @@
 }
 
 .typeset-docs {
-  --typeset-font-body: var(--font-geist);
-  --typeset-font-heading: var(--font-geist);
+  --typeset-font-body: var(--font-sans);
+  --typeset-font-heading: var(--font-sans);
   --typeset-font-mono: var(--font-jetbrains-mono);
   --typeset-size: var(--type-body);
   --typeset-leading: 1.75;

@@ -1,0 +1,38 @@
+/* Fallback faces, unchanged from
+   what next/font generated before self-hosting. */
+
+@font-face {
+  font-family: "Geist Fallback";
+  src: local(Arial);
+  ascent-override: 95.94%;
+  descent-override: 28.16%;
+  line-gap-override: 0.00%;
+  size-adjust: 104.76%;
+}
+
+@font-face {
+  font-family: "Geist Mono Fallback";
+  src: local(Arial);
+  ascent-override: 74.67%;
+  descent-override: 21.92%;
+  line-gap-override: 0.00%;
+  size-adjust: 134.59%;
+}
+
+@font-face {
+  font-family: "JetBrains Mono Fallback";
+  src: local(Arial);
+  ascent-override: 75.79%;
+  descent-override: 22.29%;
+  line-gap-override: 0.00%;
+  size-adjust: 134.59%;
+}
+
+@font-face {
+  font-family: "GeistSerifRegular Fallback";
+  src: local(Times New Roman);
+  ascent-override: 87.78%;
+  descent-override: 25.77%;
+  line-gap-override: 0.00%;
+  size-adjust: 114.49%;
+}

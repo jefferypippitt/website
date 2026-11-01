@@ -1,10 +1,9 @@
 import { Analytics } from "@vercel/analytics/next"
-import { GeistPixelCircle } from "geist/font/pixel"
-import { GeistSerifRegular } from "geist/font/serif/regular"
 import type { Metadata, Viewport } from "next"
-import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google"
 
 import "./globals.css"
+import "./fonts/fallbacks.css"
+import { Geist, GeistMono, GeistSerifRegular } from "./fonts/site"
 import ThemeProvider from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toast"
 import { site } from "@/lib/site"
@@ -41,23 +40,6 @@ export const viewport: Viewport = {
   ],
 }
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-sans" })
-
-const fontMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-})
-
-const geistTypeset = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist",
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-})
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -69,13 +51,10 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn(
         "antialiased",
-        fontMono.variable,
-        GeistPixelCircle.variable,
+        GeistMono.variable,
         GeistSerifRegular.variable,
         "font-sans",
-        geist.variable,
-        geistTypeset.variable,
-        jetbrainsMono.variable
+        Geist.variable
       )}
     >
       <head>
