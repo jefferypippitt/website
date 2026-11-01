@@ -29,7 +29,7 @@ export default function FrameworkLoop() {
 
   return (
     <span
-      className="inline-grid whitespace-nowrap max-sm:grid max-sm:w-fit"
+      className="inline-grid whitespace-nowrap"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}

@@ -29,7 +29,7 @@ export default function Page() {
             aria-hidden
           />
           <span>
-            Building modern web applications with <FrameworkLoop />
+          Building web applications with <FrameworkLoop />
           </span>
         </h1>
       </div>

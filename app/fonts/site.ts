@@ -1,8 +1,9 @@
 // Subset fonts: each .woff2 holds only the characters in its unicode-range.
-// Each font is a core face (ASCII and common punctuation, preloaded unless
-// `preload: false`) plus an extended face in the same family that only
-// downloads when a page uses one of its characters. The fallback faces are in
-// fallbacks.css; next/font's own fallback generation is off.
+// Each font is a core face (ASCII, common punctuation, and any character the
+// old preloaded file covered that the site uses, like ° and ′ on About;
+// preloaded unless `preload: false`) plus an extended face in the same family
+// that only downloads when a page uses one of its characters. The fallback
+// faces are in fallbacks.css; next/font's own fallback generation is off.
 import localFont from "next/font/local"
 
 export const Geist = localFont({
@@ -35,7 +36,7 @@ export const GeistMono = localFont({
   variable: "--font-mono",
   fallback: ["Geist Mono Fallback"],
   adjustFontFallback: false,
-  declarations: [{ prop: "unicode-range", value: "U+20-7E, U+A0, U+A9, U+2013-2014, U+2018-2019, U+201C-201D, U+2026" }],
+  declarations: [{ prop: "unicode-range", value: "U+20-7E, U+A0, U+A9, U+B0, U+2013-2014, U+2018-2019, U+201C-201D, U+2026, U+2032" }],
 })
 
 export const GeistMonoExtended = localFont({
@@ -47,7 +48,7 @@ export const GeistMonoExtended = localFont({
   adjustFontFallback: false,
   declarations: [
     { prop: "font-family", value: "GeistMono" },
-    { prop: "unicode-range", value: "U+A1-A8, U+AA-AC, U+AE-113, U+116-12B, U+12E-131, U+134-137, U+139-13E, U+141-148, U+14A-14D, U+150-17E, U+2032, U+2212" },
+    { prop: "unicode-range", value: "U+A1-A8, U+AA-AC, U+AE-AF, U+B1-113, U+116-12B, U+12E-131, U+134-137, U+139-13E, U+141-148, U+14A-14D, U+150-17E, U+2212" },
   ],
 })
 
