@@ -1,0 +1,42 @@
+export const metadata = {
+  title: "A TanStack Start and Notion Starter",
+  description:
+    "A blog and portfolio template built with TanStack Start, with all of its content managed in a single Notion database.",
+  date: "2026-11-03",
+}
+
+I made [tanstack-notion-starter](https://github.com/jefferypippitt/tanstack-notion-starter), a blog and portfolio template built with [TanStack Start](https://tanstack.com/start). All of the content lives in one Notion database: posts, projects, the About page, work history, and footer links. Once it's set up, you only ever edit Notion.
+
+You can see the demo at [tanstack-notion-starter.vercel.app](https://tanstack-notion-starter.vercel.app).
+
+## What's in it
+
+- Server-rendered React with type-safe file routing
+- Posts and projects with covers, tags, and full Notion page bodies
+- Code highlighting with [Shiki](https://shiki.style/), plus light and dark themes
+- A sitemap, RSS feed, robots.txt, and Open Graph tags built from your content
+- [shadcn/ui](https://ui.shadcn.com/) components with [Tailwind CSS](https://tailwindcss.com/)
+
+## Getting started
+
+```bash
+git clone https://github.com/jefferypippitt/tanstack-notion-starter.git my-site
+cd my-site
+pnpm install
+pnpm setup:notion
+pnpm dev
+```
+
+`pnpm setup:notion` asks for a Notion integration secret and a link to an empty page. Then it creates the database with every column the site reads, and offers to fill it with demo content. After that, adding a row in Notion adds it to the site on the next page load.
+
+## One database, five types
+
+Every row has a **Type**, and only rows with **Published** checked show up:
+
+- `Post`: a blog post
+- `Project`: a portfolio project, with optional cover video and live and repo links
+- `About`: the About page text
+- `Experience`: a role on the About page
+- `Link`: an icon in the footer
+
+Deploying to [Vercel](https://vercel.com/) takes one click from the README. Add your two Notion values as environment variables and you're done.

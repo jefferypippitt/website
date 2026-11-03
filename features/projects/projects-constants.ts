@@ -25,6 +25,13 @@ export const projects = [
     year: 2026,
   },
   {
+    name: "tanstack-notion-starter",
+    description:
+      "TanStack Starter Template with Notion database.",
+    href: "https://github.com/jefferypippitt/tanstack-notion-starter",
+    year: 2026,
+  },
+  {
     name: "jevelements",
     description:
       "Chrome extension and Next.js backend that turns a page section into a Next.js app.",
